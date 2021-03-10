@@ -20,8 +20,8 @@ public class Level : MonoBehaviour
     {
         Player.OnPlayerLose = PlayerLose;
         Enemy.OnEnemyLose = EnemyLose;
-        Enemy.OnBallColiderEnter = CaughtTheBall;
-        Enemy.speed = Difictly;
+        //Enemy.OnBallColiderEnter = CaughtTheBall;
+        Enemy.Speed = Difictly;
         Ball.OnBallDestroy = OnBallDestroy;
         InputController.OnInputExit = Ball.StartBall;
     }
@@ -35,14 +35,14 @@ public class Level : MonoBehaviour
     {
         Difictly++;
         Text.text = "" + Difictly;
-        Text.fontSize = (Difictly < 10) ? 100 : ((Difictly >= 10 && Difictly < 100) ? 75 : ((Difictly >= 100 && Difictly < 1000) ? 50 : 25));
-        Ball.RespawnBall(RespawnBallPosition);
-        int ESMax = 4;
-        int EScale = (Difictly <= ESMax) ? Difictly : ((Difictly % (ESMax * 2) >= ESMax) ? (ESMax - Difictly % ESMax) : (Difictly % ESMax));
-        EScale = (EScale == 0) ? 1 : EScale;
-        Enemy.SetScale(EScale);
+        //Text.fontSize = (Difictly < 10) ? 100 : ((Difictly >= 10 && Difictly < 100) ? 75 : ((Difictly >= 100 && Difictly < 1000) ? 50 : 25));
+        //Ball.RespawnBall(RespawnBallPosition);
+        //int ESMax = 4;
+        //int EScale = (Difictly <= ESMax) ? Difictly : ((Difictly % (ESMax * 2) >= ESMax) ? (ESMax - Difictly % ESMax) : (Difictly % ESMax));
+        //EScale = (EScale == 0) ? 1 : EScale;
+        //Enemy.SetScale(EScale);
         //Debug.Log(Difictly);
-        Enemy.speed = Difictly;//10f;
+        Enemy.Speed = Difictly;//10f;
         //Enemy.RespawnBlcok();
         StartCoroutine(RespawnEnemy());
     }
@@ -50,13 +50,13 @@ public class Level : MonoBehaviour
     IEnumerator RespawnEnemy()
     {
         yield return new WaitForSeconds(1f);
-        Enemy.RespawnBlcok();
+        Enemy.ReRespawn();
     }
 
-    public void CaughtTheBall()
-    {
+    //public void CaughtTheBall()
+    //{
 
-    }
+    //}
 
     public void OnBallDestroy()
     {

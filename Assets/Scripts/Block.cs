@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BlockType
-{
-    Enemy,
-    Frendly
-}
+//public enum BlockType
+//{
+//    Enemy,
+//    Frendly
+//}
 
 public class Block : MonoBehaviour
 {
-    public BlockType Type;
+    //public BlockType Type;
 
     public OnEvent onBlockDestruct;
 
@@ -28,6 +28,11 @@ public class Block : MonoBehaviour
             onBlockDestruct();
             gameObject.SetActive(false);
         }
+    }
+
+    public void Respawn()
+    {
+        gameObject.SetActive(true);
     }
 
     // Update is called once per frame

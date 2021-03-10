@@ -2,94 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public delegate void Comeback();
+[CreateAssetMenu(fileName = "Enemy", menuName = "Enemy", order = 1)]
+public class Enemy : ScriptableObject
 {
+    [Header("Parameters")]
+    [SerializeField]
+    private int _health;
+    [SerializeField]
+    private float _speed;
+    [SerializeField]
+    private bool _enemyLock = false;
+    public int Health { get { return _health; } }
+    public float Speed { get { return _speed; } set { _speed = value; } }
+    public bool isLock { get { return _enemyLock; } }
+
     public OnEvent OnEnemyLose;
-    public OnEvent OnBallColiderEnter;
-    public Rigidbody Rigidbody;
-    public Transform Ball;
-    private int health;
-    public int Health { get { return health; } }
-    public float speed;
-    public List<Block> Blocks;
-    bool EnemyLock = false;
-    // Start is called before the first frame update
-    void Start()
+    //public OnEvent OnBallColiderEnter;
+    public Comeback ReRespawn;
+
+    public Enemy()
     {
-        health = Blocks.Count;
-        foreach (var item in Blocks)
-        {
-            item.onBlockDestruct = OnBlockDestruct;
-        }
+
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnBlockDestruct()
     {
-        if(collision.gameObject.tag == "Ball")
-        {
-            OnBallColiderEnter();
-            Rigidbody.velocity = Vector3.zero;
-            
-        }
-    }
-
-    void OnBlockDestruct()
-    {
-        health--;
-        if (health == 0)
+        _health--;
+        if(_health == 0)
         {
             OnEnemyLose();
-            
         }
-
     }
-
-    private void MoveToBall(float speed)
+    public void RespawnBlcoks(List<Block> blocks)
     {
-        float BallX = Ball.position.x;
-        float EnemyX = transform.position.x;
-        //Debug.Log(speed);
-        if (BallX > EnemyX)
+        _health = blocks.Count;
+        foreach (var item in blocks)
         {
-            Rigidbody.AddForce(transform.right * speed, ForceMode.Force);
-            //Debug.Log("Right " + transform.right * speed);
-        }
-        else if (BallX < EnemyX)
-        {
-            Rigidbody.AddForce(-transform.right * speed, ForceMode.Force);
-            //Debug.Log("Left " + -transform.right * speed);
-        }
-        else if(BallX == EnemyX)
-        {
-            Rigidbody.velocity = Vector3.zero;
+            item.Respawn();
         }
     }
 
-    public void RespawnBlcok()
+    public Vector3 MoveTo(Transform EnemyTransform, float PositionX)
     {
-        health = Blocks.Count;
-        foreach (var item in Blocks)
+        float EnemyX = EnemyTransform.position.x;
+        if (PositionX > EnemyX)
         {
-            item.gameObject.SetActive(true);
+            return EnemyTransform.right * _speed;
         }
-    }
-
-    public void SetScale(float scale)
-    {
-        transform.localScale = new Vector3(scale, transform.localScale.y, transform.localScale.z);
+        else if (PositionX < EnemyX)
+        {
+            return -EnemyTransform.right * _speed;
+        }
+        else
+        {
+            return Vector3.zero;
+        }
     }
 
     public void Paused(bool isPaused)
     {
-        EnemyLock = isPaused;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!EnemyLock)
-        {
-            MoveToBall(speed);
-        }
+        _enemyLock = isPaused;
     }
 }

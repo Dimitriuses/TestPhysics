@@ -751,16 +751,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 454195920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24199c068f7e80144b7afaf65deac8b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 832a71fa58e081f40be72972b84e4257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 454195926}
   Ball: {fileID: 668350379}
-  speed: 0
   Blocks:
   - {fileID: 83121611}
   - {fileID: 450564293}
   - {fileID: 1908867216}
+  Enemy: {fileID: 11400000, guid: a12f1e6a88de8964a90ece801b7f131a, type: 2}
 --- !u!54 &454195926
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1512,6 +1511,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 368694905914428124, guid: c42742168b65219499737e24f78554e5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c42742168b65219499737e24f78554e5, type: 3}
 --- !u!1 &924991921
@@ -1721,6 +1725,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BlockEnemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 368694905914428124, guid: c42742168b65219499737e24f78554e5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c42742168b65219499737e24f78554e5, type: 3}
@@ -2181,7 +2190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 668350375}
-  Enemy: {fileID: 454195925}
+  Enemy: {fileID: 0}
   InputController: {fileID: 196763543}
 --- !u!1 &1296936523
 GameObject:
@@ -2909,7 +2918,7 @@ MonoBehaviour:
   Difictly: 0
   RespawnBallPosition: {x: 0, y: -5}
   Player: {fileID: 1589983231}
-  Enemy: {fileID: 454195925}
+  Enemy: {fileID: 11400000, guid: a12f1e6a88de8964a90ece801b7f131a, type: 2}
   Ball: {fileID: 668350375}
   InputController: {fileID: 196763543}
   Text: {fileID: 111565652}
@@ -3131,6 +3140,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BlockEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 368694905914428124, guid: c42742168b65219499737e24f78554e5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c42742168b65219499737e24f78554e5, type: 3}
