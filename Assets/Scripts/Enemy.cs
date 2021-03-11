@@ -4,7 +4,7 @@ using UnityEngine;
 
 public delegate void Comeback();
 [CreateAssetMenu(fileName = "Enemy", menuName = "Enemy", order = 1)]
-public class Enemy : ScriptableObject
+public class Enemy : /*MonoBehaviour*/ ScriptableObject
 {
     [Header("Parameters")]
     [SerializeField]
@@ -21,15 +21,15 @@ public class Enemy : ScriptableObject
     //public OnEvent OnBallColiderEnter;
     public Comeback ReRespawn;
 
-    public Enemy()
-    {
+    //public Enemy()
+    //{
 
-    }
+    //}
 
     public void OnBlockDestruct()
     {
         _health--;
-        if(_health == 0)
+        if(_health == 0 && OnEnemyLose != null)
         {
             OnEnemyLose();
         }

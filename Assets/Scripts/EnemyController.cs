@@ -15,7 +15,8 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Enemy = new Enemy();
+        //Enemy = new Enemy();
+
         Rigidbody = gameObject.GetComponent<Rigidbody>();
         foreach (var item in Blocks)
         {
