@@ -5,9 +5,13 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
     public Transform ArrowEnd;
+    public Transform Arrow;
+    public Transform Ball;
     public Camera Camera;
 
-    public OnEvent OnInputExit;
+    //public OnEvent OnInputExit;
+    public OnEventWithParameters OnInputExit;
+    float ArrowScale;
     bool InputLock;
     private void OnMouseDrag()
     {
@@ -22,6 +26,12 @@ public class InputController : MonoBehaviour
             //Debug.Log(Input.mousePosition + " | " + MousePos);
             //Debug.Log(MousePos);
             ArrowEnd.position = new Vector3(MousePos.x, ArrowEnd.position.y, MousePos.z);
+
+            Ball.LookAt(ArrowEnd);
+            float tmpDistance = Vector3.Distance(ArrowEnd.position, transform.position);
+            ArrowScale = tmpDistance;
+            float HeightArrow = tmpDistance / 12.5f;
+            Arrow.gameObject.transform.localScale = new Vector3(HeightArrow, HeightArrow, 1);
         }
         
     }
@@ -30,7 +40,7 @@ public class InputController : MonoBehaviour
     {
         if (!InputLock)
         {
-            OnInputExit();
+            OnInputExit(ArrowScale);
         }
 
     }

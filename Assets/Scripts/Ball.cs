@@ -36,14 +36,14 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (RedyToStart && !BallLock)
-        {
-            transform.LookAt(EndArrow);
-            float tmpDistance = Vector3.Distance(EndArrow.position, transform.position);
-            speed = tmpDistance * 2;
-            float HeightArrow = tmpDistance / 12.5f;
-            Arrow.gameObject.transform.localScale = new Vector3(HeightArrow,HeightArrow,1);
-        }
+        //if (RedyToStart && !BallLock)
+        //{
+        //    transform.LookAt(EndArrow);
+        //    float tmpDistance = Vector3.Distance(EndArrow.position, transform.position);
+        //    speed = tmpDistance * 2;
+        //    float HeightArrow = tmpDistance / 12.5f;
+        //    Arrow.gameObject.transform.localScale = new Vector3(HeightArrow,HeightArrow,1);
+        //}
     }
 
     public void StartBall()
@@ -70,6 +70,8 @@ public class Ball : MonoBehaviour
     {
         Rigidbody.AddForce(transform.forward * speed,ForceMode.Impulse);
     }
+
+
 
     public void Paused(bool isPaused)
     {

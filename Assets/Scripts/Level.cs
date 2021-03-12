@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public delegate void OnEvent();
+public delegate void OnEventWithParameters(float parameter1);
 public class Level : MonoBehaviour
 {
     public int Difictly = 0;
