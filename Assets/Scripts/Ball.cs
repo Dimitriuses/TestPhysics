@@ -2,94 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+[CreateAssetMenu(fileName = "AssetBall", menuName = "AssetBall", order = 1)]
+public class Ball : ScriptableObject //MonoBehaviour
 {
     public OnEvent OnBallDestroy;
-    
-    public float speed = 0;
+    public Callback ReMove;
+    public CallbackWithParameters Respawn;
+
+    [Header("Parameters")]
+    [SerializeField]
+    private float _speed = 0;
+    [SerializeField]
+    private bool _ready = true;
+
+    public float Speed => _speed;
+    public bool RaedyToStart => _ready;
+
     public Vector3 SaveVelosity;
-    public Rigidbody Rigidbody;
 
-    public bool RedyToStart = true;
-    bool BallLock = false;
-    public Transform Arrow;
-    public Transform EndArrow;
-
-    // Start is called before the first frame update
-    void Start()
+    public void OnCollisionTriger()
     {
-        //Move();
+        //Debug.Log("Trigered");
+        OnBallDestroy();
     }
-    
-    private void OnCollisionEnter(Collision collision)
+    public void StartBall(float arrowScale)
     {
-        string tmptag = collision.gameObject.tag;
-        //Debug.Log(collision.collider.gameObject.tag);
-        if (tmptag == "Enemy" || tmptag == "Block")
+        //Debug.Log(arrowScale);
+        //Debug.Log(_ready);
+        if (_ready)
         {
-            gameObject.SetActive(false);
-            Stop();
-            OnBallDestroy();
+            _ready = false;
+            _speed = arrowScale * 2;
+            ReMove();
+            //Debug.Log("ReMove");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (RedyToStart && !BallLock)
-        //{
-        //    transform.LookAt(EndArrow);
-        //    float tmpDistance = Vector3.Distance(EndArrow.position, transform.position);
-        //    speed = tmpDistance * 2;
-        //    float HeightArrow = tmpDistance / 12.5f;
-        //    Arrow.gameObject.transform.localScale = new Vector3(HeightArrow,HeightArrow,1);
-        //}
-    }
-
-    public void StartBall()
-    {
-        if (RedyToStart)
-        {
-            RedyToStart = false;
-            Arrow.gameObject.SetActive(false);
-            Move();
-        }
-
     }
 
     public void RespawnBall(Vector2 position)
     {
-        transform.position = new Vector3(position.x, transform.position.y, position.y);
-        EndArrow.position = transform.position;
-        gameObject.SetActive(true);
-        Arrow.gameObject.SetActive(true);
-        RedyToStart = true;
-    }
-
-    private void Move()
-    {
-        Rigidbody.AddForce(transform.forward * speed,ForceMode.Impulse);
-    }
-
-
-
-    public void Paused(bool isPaused)
-    {
-        if (isPaused)
-        {
-            SaveVelosity = Stop();
-        }
-        else
-        {
-            Rigidbody.velocity = SaveVelosity;
-        }
-        BallLock = isPaused;
-    }
-
-    public Vector3 Stop()
-    {
-        Vector3 tmp = Rigidbody.velocity;
-        Rigidbody.velocity = Vector3.zero;
-        return tmp;
+        Respawn(position);
+        _ready = true;
     }
 }

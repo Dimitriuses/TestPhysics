@@ -421,6 +421,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowEnd: {fileID: 169242055}
+  Arrow: {fileID: 355098259}
+  Ball: {fileID: 668350379}
   Camera: {fileID: 1088412001}
 --- !u!65 &196763544
 BoxCollider:
@@ -899,15 +901,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 668350374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48e8089560ee12b4a9087b51c1a84d9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 62d34fe02ec450646b4aa7be131b4c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  SaveVelosity: {x: 0, y: 0, z: 0}
-  Rigidbody: {fileID: 668350380}
-  RedyToStart: 1
-  Arrow: {fileID: 355098259}
-  EndArrow: {fileID: 169242055}
+  Ball: {fileID: 11400000, guid: 8296645ff66c5ab43911898e6b6c58f9, type: 2}
 --- !u!135 &668350376
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2189,7 +2186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec6cfb9f41592b4089f6e55206fbdbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ball: {fileID: 668350375}
+  Ball: {fileID: 0}
   Enemy: {fileID: 0}
   InputController: {fileID: 196763543}
 --- !u!1 &1296936523
@@ -2919,7 +2916,7 @@ MonoBehaviour:
   RespawnBallPosition: {x: 0, y: -5}
   Player: {fileID: 1589983231}
   Enemy: {fileID: 11400000, guid: a12f1e6a88de8964a90ece801b7f131a, type: 2}
-  Ball: {fileID: 668350375}
+  Ball: {fileID: 11400000, guid: 8296645ff66c5ab43911898e6b6c58f9, type: 2}
   InputController: {fileID: 196763543}
   Text: {fileID: 111565652}
 --- !u!1 &2060148124

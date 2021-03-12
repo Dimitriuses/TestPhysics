@@ -11,6 +11,7 @@ public class InputController : MonoBehaviour
 
     //public OnEvent OnInputExit;
     public OnEventWithParameters OnInputExit;
+
     float ArrowScale;
     bool InputLock;
     private void OnMouseDrag()
@@ -27,6 +28,7 @@ public class InputController : MonoBehaviour
             //Debug.Log(MousePos);
             ArrowEnd.position = new Vector3(MousePos.x, ArrowEnd.position.y, MousePos.z);
 
+            ArrowSetActive(true);
             Ball.LookAt(ArrowEnd);
             float tmpDistance = Vector3.Distance(ArrowEnd.position, transform.position);
             ArrowScale = tmpDistance;
@@ -40,13 +42,26 @@ public class InputController : MonoBehaviour
     {
         if (!InputLock)
         {
+            ArrowSetActive(false);
             OnInputExit(ArrowScale);
+            //Debug.Log(ArrowScale);
         }
 
     }
     public void Paused(bool isPaused)
     {
         InputLock = isPaused;
+    }
+
+    public void ArrowSetActive(bool isActive)
+    {
+        Arrow.gameObject.SetActive(isActive);
+    }
+
+    public void RespawnArrow()
+    {
+        ArrowEnd.position = Ball.position;
+        //ArrowSetActive(true);
     }
     // Start is called before the first frame update
     void Start()

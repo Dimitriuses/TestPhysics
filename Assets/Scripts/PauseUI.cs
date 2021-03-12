@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PauseUI : MonoBehaviour
 {
-    public Ball Ball;
+    public BallController Ball;
     public Enemy Enemy;
     public InputController InputController;
     // Start is called before the first frame update

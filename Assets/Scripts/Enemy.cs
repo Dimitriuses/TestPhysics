@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void Comeback();
-[CreateAssetMenu(fileName = "Enemy", menuName = "Enemy", order = 1)]
+[CreateAssetMenu(fileName = "AssetEnemy", menuName = "AssetEnemy", order = 1)]
 public class Enemy : /*MonoBehaviour*/ ScriptableObject
 {
     [Header("Parameters")]
@@ -19,7 +18,7 @@ public class Enemy : /*MonoBehaviour*/ ScriptableObject
 
     public OnEvent OnEnemyLose;
     //public OnEvent OnBallColiderEnter;
-    public Comeback ReRespawn;
+    public Callback ReRespawn;
 
     //public Enemy()
     //{

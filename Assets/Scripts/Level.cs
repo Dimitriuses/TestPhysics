@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public delegate void OnEvent();
 public delegate void OnEventWithParameters(float parameter1);
+
+public delegate void Callback();
+public delegate void CallbackWithParameters(Vector2 parameter1);
+
 public class Level : MonoBehaviour
 {
     public int Difictly = 0;
@@ -25,19 +29,20 @@ public class Level : MonoBehaviour
         Enemy.Speed = Difictly;
         Ball.OnBallDestroy = OnBallDestroy;
         InputController.OnInputExit = Ball.StartBall;
+
+        Ball.RespawnBall(RespawnBallPosition);
     }
 
     public void PlayerLose()
     {
-        Ball.Stop();
+        //Ball.Stop();
     }
 
     public void EnemyLose()
     {
         Difictly++;
         Text.text = "" + Difictly;
-        //Text.fontSize = (Difictly < 10) ? 100 : ((Difictly >= 10 && Difictly < 100) ? 75 : ((Difictly >= 100 && Difictly < 1000) ? 50 : 25));
-        //Ball.RespawnBall(RespawnBallPosition);
+        Text.fontSize = (Difictly < 10) ? 100 : ((Difictly >= 10 && Difictly < 100) ? 75 : ((Difictly >= 100 && Difictly < 1000) ? 50 : 25));
         //int ESMax = 4;
         //int EScale = (Difictly <= ESMax) ? Difictly : ((Difictly % (ESMax * 2) >= ESMax) ? (ESMax - Difictly % ESMax) : (Difictly % ESMax));
         //EScale = (EScale == 0) ? 1 : EScale;
@@ -62,6 +67,7 @@ public class Level : MonoBehaviour
     public void OnBallDestroy()
     {
         Ball.RespawnBall(RespawnBallPosition);
+        InputController.RespawnArrow();
     }
 
     // Update is called once per frame

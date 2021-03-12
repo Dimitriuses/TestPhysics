@@ -5,15 +5,14 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     public Ball Ball;
-    public Transform Arrow;
-    public Transform EndArrow;
 
     private Rigidbody Rigidbody;
-
     // Start is called before the first frame update
     void Start()
     {
         Rigidbody = gameObject.GetComponent<Rigidbody>();
+        Ball.ReMove = Move;
+        Ball.Respawn = RespawnToPosition;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -23,13 +22,18 @@ public class BallController : MonoBehaviour
         {
             gameObject.SetActive(false);
             Stop();
-            //OnBallDestroy();
+            Ball.OnCollisionTriger();
         }
+    }
+    private void RespawnToPosition(Vector2 position)
+    {
+        transform.position = new Vector3(position.x, transform.position.y, position.y);
+        gameObject.SetActive(true);
     }
 
     private void Move()
     {
-        //Rigidbody.AddForce(transform.forward * speed, ForceMode.Impulse);
+        Rigidbody.AddForce(transform.forward * Ball.Speed, ForceMode.Impulse);
     }
 
     public Vector3 Stop()
@@ -37,6 +41,18 @@ public class BallController : MonoBehaviour
         Vector3 tmp = Rigidbody.velocity;
         Rigidbody.velocity = Vector3.zero;
         return tmp;
+    }
+
+    public void Paused(bool isPaused)
+    {
+        if (isPaused)
+        {
+            Ball.SaveVelosity = Stop();
+        }
+        else
+        {
+            Rigidbody.velocity = Ball.SaveVelosity;
+        }
     }
 
     // Update is called once per frame
