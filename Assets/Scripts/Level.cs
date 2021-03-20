@@ -17,8 +17,7 @@ public class Level : MonoBehaviour
     public Enemy Enemy;
     public Ball Ball;
     public InputController InputController;
-
-    public Text Text;
+    public PlaceService PlaceService;
     //bool isBallInWorkSpace;
     // Start is called before the first frame update
     void Start()
@@ -41,8 +40,8 @@ public class Level : MonoBehaviour
     public void EnemyLose()
     {
         Difictly++;
-        Text.text = "" + Difictly;
-        Text.fontSize = (Difictly < 10) ? 100 : ((Difictly >= 10 && Difictly < 100) ? 75 : ((Difictly >= 100 && Difictly < 1000) ? 50 : 25));
+        PlaceService.SetDiffictlyText(Difictly);
+        //Text.fontSize = (Difictly < 10) ? 100 : ((Difictly >= 10 && Difictly < 100) ? 75 : ((Difictly >= 100 && Difictly < 1000) ? 50 : 25));
         //int ESMax = 4;
         //int EScale = (Difictly <= ESMax) ? Difictly : ((Difictly % (ESMax * 2) >= ESMax) ? (ESMax - Difictly % ESMax) : (Difictly % ESMax));
         //EScale = (EScale == 0) ? 1 : EScale;

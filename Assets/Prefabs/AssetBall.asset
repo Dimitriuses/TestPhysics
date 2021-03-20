@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e8089560ee12b4a9087b51c1a84d9f, type: 3}
   m_Name: AssetBall
   m_EditorClassIdentifier: 
-  _speed: 10.132236
-  _ready: 1
+  _speed: 13.170279
+  _ready: 0
+  _lock: 0
   SaveVelosity: {x: 0, y: 0, z: 0}

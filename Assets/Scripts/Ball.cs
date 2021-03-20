@@ -14,9 +14,12 @@ public class Ball : ScriptableObject //MonoBehaviour
     private float _speed = 0;
     [SerializeField]
     private bool _ready = true;
+    [SerializeField]
+    private bool _lock = false;
 
     public float Speed => _speed;
     public bool RaedyToStart => _ready;
+    public bool MoveLock => _lock;
 
     public Vector3 SaveVelosity;
 

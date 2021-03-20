@@ -33,7 +33,11 @@ public class BallController : MonoBehaviour
 
     private void Move()
     {
-        Rigidbody.AddForce(transform.forward * Ball.Speed, ForceMode.Impulse);
+        if (!Ball.MoveLock)
+        {
+            Rigidbody.AddForce(transform.forward * Ball.Speed, ForceMode.Impulse);
+        }
+
     }
 
     public Vector3 Stop()
